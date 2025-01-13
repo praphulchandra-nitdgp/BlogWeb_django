@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -121,14 +122,17 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+LOGIN_REDIRECT_URL = 'blog-index'
+
+
 # STATICFILES_DIRS = [
 #     (BASE_DIR/ 'static')
 # ]
 # STATIC_ROOT= (BASE_DIR/ 'assets')
-
-# MEDIA_URL= '/media/'
-
+STATIC_URL = 'static/'
+MEDIA_URL= '/media/'
+MEDIA_ROOT= (BASE_DIR / 'media')
+STATIC_ROOT= (BASE_DIR/ 'asset')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

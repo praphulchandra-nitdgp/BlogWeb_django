@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+{% block title %}LogIn page{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row mt-5 pt-3">
+            <div class="col-md-4 offset-md-5">
+                <div class="card my-3 shadow" style="width: 40vw;">
+                    <div class="card-body">
+                        <h4>Login</h4>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <input class="btn btn-primary btn-block" type="submit" value="Login">
+                        </form>
+                        <div class="text-center my-3">
+                            <p>Don't have an account yet? <a style="color: rgb(8, 97, 199);" href="{% url 'users-sign-up' %}">Sign Up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
