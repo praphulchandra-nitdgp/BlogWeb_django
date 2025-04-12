@@ -9,5 +9,8 @@ urlpatterns = [
     path('profile/', views.profile, name='users-profile'),
     path('', auth_views.LoginView.as_view(template_name='users/login.html'), name='users-login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='users-logout'),
-    
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='users-password-reset'),
+
+
 ]
+# template_name='users/password_reset.html'

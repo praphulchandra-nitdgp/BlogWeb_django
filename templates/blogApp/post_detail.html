@@ -20,8 +20,33 @@
                                 <hr/>
                                 <h4>{{post.title}}</h4>
                                 <p>{{ post.content }}</p>
-                            </div>
+                            </div>   
                         </div>
+                        <p class="d-inline-flex gap-1 mt-3">
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Comment: {{post.comment_count}}
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body overflow-auto" style="height: 270px;">
+                                    {% for comment in post.comments.all %}
+                                    
+                                    <p class="text-justify">
+                                        <img src="{{ comment.author.profilemodel.image.url }}" alt="Profile Picture" 
+                                        class="rounded-circle" width="25" height="25">{{ comment.author }}: {{ comment.content }}
+                                    </p>  
+                                    {% empty %}
+                                    <p class="text-justify">
+                                        no comments yet!! Be the first to comment.
+                                    </p>
+                                    {% endfor %}
+                            </div> 
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ c_form|crispy }}
+                            <input type="submit" value="Comment" class="btn btn-primary btn-sm mt-2">
+                        </form>
                     </div>
                 </div>
             </div>

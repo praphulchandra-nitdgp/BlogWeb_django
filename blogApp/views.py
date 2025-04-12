@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
-from .models import PostModel
-from .forms import PostModelForm,PostUpdateForm
+from .models import PostModel, Comment
+from .forms import PostModelForm,PostUpdateForm, CommentForm
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def index(request):
     
     posts = PostModel.objects.all()
@@ -22,13 +25,26 @@ def index(request):
 
     return render(request, 'blogApp/index.html',context)
 
+@login_required
 def post_detail(request, pk):
     post = PostModel.objects.get(id=pk)
+    if request.method == 'POST':
+        c_form = CommentForm(request.POST)
+        if c_form.is_valid():
+            instance = c_form.save(commit=False)
+            instance.post = post
+            instance.author = request.user
+            instance.save()
+            return redirect('blog-post-detail', pk=post.id)
+    else:
+        c_form = CommentForm()
     context = {
+        'c_form': c_form,
         'post': post,
     }
     return render(request, 'blogApp/post_detail.html', context)
 
+@login_required
 def post_edit(request, pk):
     post = PostModel.objects.get(id=pk)
     if request.method == 'POST':
@@ -44,6 +60,7 @@ def post_edit(request, pk):
     }
     return render(request, 'blogApp/post_edit.html', context)
 
+@login_required
 def post_delete(request, pk):
     post = PostModel.objects.get(id=pk)
     if request.method == 'POST':
