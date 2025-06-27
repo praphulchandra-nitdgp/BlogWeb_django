@@ -1,6 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-primary fixed-top">
-    <div class="container">
-        <div class="container-fluid">
+
+        <!-- <div class="container-fluid">
             <a class="navbar-brand text-white" href="{% url 'blog-index' %}">Blog<span style="color: yellow;">Scribers</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,6 +26,138 @@
                     {% endif %}
                 </ul>
             </div>
-        </div>
+        </div> -->
+
+<!-- <nav class="fixed top-0 w-full bg-[#f7f7f9] text-black shadow z-50 text-sm">
+
+  <div class="grid grid-cols-4 gap-2 px-4 py-2 h-[6vh]">
+    <div class="col-span-1 p-2 text-left rounded bg-amber-50">
+      Left
     </div>
+    <div class="col-span-2 p-2 text-center rounded bg-amber-50">
+      Center
+    </div>
+    <div class="col-span-1 p-2 text-right rounded bg-amber-50">
+      Right
+    </div>
+  </div>
+
+
+  <div class="grid grid-cols-5 gap-2 px-4 py-2 h-[9vh]">
+    <div class="col-span-2 p-2 text-left rounded bg-amber-50">
+      Left
+    </div>
+    <div class="col-span-1 p-2 text-center font-bold rounded bg-amber-50">
+      Center
+    </div>
+    <div class="col-span-2 p-2 text-right rounded bg-amber-50">
+      Right
+    </div>
+  </div>
+
+
+  <div class=" px-4 py-3 rounded mx-4">
+    <ul class="flex justify-center space-x-8 font-semibold bg-amber-50">
+      <li>Web Design</li>
+      <li>Maintenance</li>
+      <li>Portfolio</li>
+      <li>Resources</li>
+      <li>Blog</li>
+      <li>Contact</li>
+    </ul>
+  </div>
+</nav> -->
+<nav class="top-0 w-full bg-[#d8d8f9] text-black z-50 text-sm">
+  <!-- Row 1: 1 : 2 : 1 -->
+  <div class="flex items-center justify-between bg-[#ebe9e9] h-[55px] px-3 text-xs sm:text-sm">
+    {% if request.user.is_authenticated %}
+    <!-- Left: Social Icons -->
+    <div class="flex items-center space-x-2">
+      <img src="/media/Facebook Icons.png" alt="Facebook" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      <img src="/media/Instagram Logo.png" alt="Instagram" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      <img src="/media/LinkedIn Icon.png" alt="LinkedIn" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      <img src="/media/Pinterest icon.png" alt="Pinterest" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+    </div>
+
+    <!-- Center: Call-out Phrase -->
+    <div class="hidden sm:block italic text-gray-600 text-center mx-4 text-[0.7rem] sm:text-sm md:text-base">
+      Calling all passionate bloggers — share your voice on my blog!
+    </div>
+
+    <!-- Right: Logout Button -->
+    <div>
+    <form method="POST" action="{% url 'users-logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg px-3 py-1.5 text-sm">
+        Logout
+        </button>
+    </form>
+    {% else %}
+    <a href="{% url 'users-login' %}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg px-3 py-1.5 text-sm">
+        Login
+    </a>
+    {% endif %}
+    </div>
+  </div>
+
+  <!-- Full-width divider -->
+  <hr class="border-t-2 border-gray-200 my-0">
+
+  <!-- Row 2: Logo Center -->
+  <div class="flex justify-center items-center bg-white pt-4">
+    <a class="navbar-brand text-white" href="{% url 'blog-index' %}"><img src="/media/Quartzo Font.png" class="w-[220px] sm:w-[340px] h-auto" alt="Logo"></a>
+  </div>
+
+  <!-- Row 3: Horizontal Menu -->
+
+      <!-- Hamburger menu button -->
+      <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  <div class="hidden md:flex items-center justify-center w-full bg-white" id="navbar-sticky">
+    <ul class="flex flex-col md:flex-row w-full justify-center items-center 
+            md:space-x-8 mt-4 md:mt-0 border border-gray-200 md:border-0
+            bg-gray-50 md:bg-white rounded-lg text-sm font-medium 
+            dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
+  <li>
+  <a href="{% url 'blog-index' %}" 
+     class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
+            hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
+    Home
+  </a>
+</li>
+
+  <li>
+    <a href="#" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
+            hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
+      About
+    </a>
+  </li>
+
+  <li>
+    <a href="#" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
+            hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
+      Services
+    </a>
+  </li>
+
+  <li>
+    <a href="#" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
+            hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
+      Contact
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'users-profile' %}" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
+      Profile
+    </a>
+  </li>
+</ul>
+  </div>
 </nav>
+

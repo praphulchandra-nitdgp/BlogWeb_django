@@ -2,22 +2,35 @@
 {% block title %}SignUp page{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="cover">
-    <div class="container">
-        <div class="row mt-5 pt-3">
-            <div class="col-md-4 offset-md-5">
-                <div class="card my-3 shadow" style="width: 40vw;">
-                    <div class="card-body">
-                        <h4>Sign Up</h4>
-                        <form method="post">
-                            {% csrf_token %}
-                            {{form|crispy}}
-                            <input class="btn btn-primary btn-block" type="submit" value="Sign Up">
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="cover py-5">
+  <div class="container d-flex justify-content-center">
+    <div class="card shadow my-3" style="max-width: 900px; width: 100%;">
+      <div class="card-body d-flex p-10 justify-around form-card">
+        
+        <!-- Left: Image -->
+        <div class="w-90 d-none d-md-block">
+          <img src="/media/signup_image.png" alt="signup image" class="img-fluid h-100 w-100 rounded-start object-contain">
         </div>
+
+        <!-- Right: Signup Form -->
+        <div class="w-90 w-md-50 p-4">
+          <h4 class="mb-4 text-2xl text-center">Sign Up</h4>
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-primary w-100 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded mt-2" type="submit" value="Sign Up">
+          </form>
+
+          <hr class="my-4">
+          <div class="text-center">
+            <span>Already have an account? 
+              <a href="{% url 'users-login' %}" style="color: rgb(8, 97, 199);">Login</a>
+            </span>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}

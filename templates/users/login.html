@@ -1,29 +1,40 @@
+
 {% extends 'partials/base.html' %}
 {% block title %}LogIn page{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="cover">
-    <div class="container">
-        <div class="row mt-5 pt-3">
-            <div class="col-md-4 offset-md-5">
-                <div class="card my-3 shadow" style="width: 40vw;">
-                    <div class="card-body">
-                        <h4>Login</h4>
-                        <form method="post">
-                            {% csrf_token %}
-                            {{form|crispy}}
-                            <input class="btn btn-primary btn-block" type="submit" value="Login">
-                        </form>
-                        <div class="text-center my-3">
-                            <hr>
-                            <a href="{% url 'users-password-reset' %}">Forgot Password?</a>
-                            <hr>
-                            <p>Don't have an account yet? <a style="color: rgb(8, 97, 199);" href="{% url 'users-sign-up' %}">Sign Up</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="cover py-5">
+  <div class="container d-flex justify-content-center">
+    <div class="card shadow my-3" style="max-width: 900px; width: 100%;">
+      <div class="card-body d-flex p-10 justify-around form-card">
+        
+        <!-- Left: Image -->
+        <div class="w-90 d-none d-md-block">
+          <img src="/media/login_image.png" alt="cover image" class="img-fluid h-100 w-100 rounded-start object-contain">
         </div>
+
+        <!-- Right: Login Form -->
+        <div class="w-90 w-md-50 p-4">
+          <h4 class="mb-4 text-2xl text-center">Login</h4>
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Login"
+              class="btn btn-primary w-100 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded">
+          </form>
+
+          <div class="text-center mt-4">
+            <hr>
+            <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            <hr>
+            <span>Don't have an account yet? 
+              <a href="{% url 'users-sign-up' %}" style="color: rgb(8, 97, 199);">Sign Up</a>
+            </span>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
