@@ -2,14 +2,14 @@ from django.shortcuts import render,redirect
 from .models import PostModel, Comment
 from .forms import PostModelForm,PostUpdateForm, CommentForm
 from django.contrib.auth.decorators import login_required
-
+from .forms import ContactForm
 
 @login_required
 def index(request):
     
     posts = PostModel.objects.all()
     if request.method == 'POST':
-        form = PostModelForm(request.POST)
+        form = PostModelForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.author = request.user
@@ -48,7 +48,7 @@ def post_detail(request, pk):
 def post_edit(request, pk):
     post = PostModel.objects.get(id=pk)
     if request.method == 'POST':
-        form = PostUpdateForm(request.POST, instance=post)
+        form = PostUpdateForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('blog-post-detail', pk=post.id)
@@ -71,3 +71,17 @@ def post_delete(request, pk):
     }
     return render(request, 'blogApp/post_delete.html', context)
     
+# About Page
+def about_view(request):
+    return render(request, 'blogApp/about.html')
+
+# Contact Page
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()  
+            return redirect('contact') 
+    else:
+        form = ContactForm()
+    return render(request, 'blogApp/contact.html', {'form': form})

@@ -2,54 +2,76 @@
 {% block title %}post detail page{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="container">
-        <div class="row mt-5 pt-3">
-            <div class="col-md-8 offset-md-2">
-                <div class="card my-3 shadow">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img class="img-thumbnail" src="{{ post.author.profilemodel.image.url }}" alt="profile-img">
-                            </div>
-                            <div class="col-md-8">
-                                <small>{{post.date_created}}</small>
-                                {% if post.author == request.user %}
-                                <span><a class="btn float-right btn-danger btn-sm" href="{% url 'blog-post-delete' post.id %}">Delete</a></span>
-                                <span><a class="btn float-right mx-2 btn-primary btn-sm" href="{% url 'blog-post-edit' post.id %}">Edit</a></span> 
-                                {% endif %}                              
-                                <hr/>
-                                <h4>{{post.title}}</h4>
-                                <p>{{ post.content }}</p>
-                            </div>   
-                        </div>
-                        <p class="d-inline-flex gap-1 mt-3">
-                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Comment: {{post.comment_count}}
-                            </a>
-                        </p>
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body overflow-auto" style="height: 270px;">
-                                    {% for comment in post.comments.all %}
-                                    
-                                    <p class="text-justify">
-                                        <img src="{{ comment.author.profilemodel.image.url }}" alt="Profile Picture" 
-                                        class="rounded-circle" width="25" height="25">{{ comment.author }}: {{ comment.content }}
-                                    </p>  
-                                    {% empty %}
-                                    <p class="text-justify">
-                                        no comments yet!! Be the first to comment.
-                                    </p>
-                                    {% endfor %}
-                            </div> 
-                        </div>
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{ c_form|crispy }}
-                            <input type="submit" value="Comment" class="btn btn-primary btn-sm mt-2">
-                        </form>
-                    </div>
-                </div>
+<style>
+  .post-title {
+    font-size: 2rem; /* larger font size */
+    font-weight: 700;
+    color: #222;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .post-image {
+    width: 100%;
+    height: 40vh;
+    border-radius: 10px;
+    object-fit: contain;
+  }
+</style>
+
+<div class="container">
+  <div class="row mt-4 pt-3">
+    <div class="col-md-8 offset-md-2">
+      <div class="card my-3 shadow">
+        <div class="card-body">
+
+          <!-- Full-width image -->
+          <img class="post-image mb-3" src="{{ post.image.url }}" alt="blog-img">
+
+          <!-- Meta & actions -->
+          <small class="text-muted">{{ post.date_created }}</small>
+          {% if post.author == request.user %}
+            <span><a class="btn float-right btn-danger btn-sm" href="{% url 'blog-post-delete' post.id %}">Delete</a></span>
+            <span><a class="btn float-right mx-2 btn-primary btn-sm" href="{% url 'blog-post-edit' post.id %}">Edit</a></span>
+          {% endif %}
+
+          <hr/>
+
+          <!-- Title -->
+          <h2 class="post-title">{{ post.title }}</h2>
+
+          <!-- Content -->
+          <p style="white-space: pre-wrap;">{{ post.content }}</p>
+
+          <!-- Comments toggle -->
+          <p class="d-inline-flex gap-1 mt-3">
+              <i class="fa-regular fa-comment blog-meta"></i> Comments ({{ post.comment_count }})
+          </p>
+
+          <!-- Comments section -->
+          <div>
+            <div class="card card-body overflow-auto" style="max-height: 270px;">
+              {% for comment in post.comments.all %}
+                <p class="flex text-justify mb-2">
+                  <img src="{{ comment.author.profilemodel.image.url }}" alt="Profile Picture" 
+                       class="rounded-circle mx-2 my-1" width="25" height="25">
+                  <strong>{{ comment.author }}</strong>: {{ comment.content }}
+                </p>
+              {% empty %}
+                <p class="text-muted">No comments yet! Be the first to comment.</p>
+              {% endfor %}
             </div>
+          </div>
+
+          <!-- Comment form -->
+          <form method="POST">
+            {% csrf_token %}
+            {{ c_form|crispy }}
+            <input type="submit" value="Comment" class="btn btn-primary btn-sm mt-2">
+          </form>
+
         </div>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock %}

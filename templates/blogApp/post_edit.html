@@ -2,19 +2,59 @@
 {% block title %}post edit page{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="container">
-        <div class="row mt-5 pt-3">
-            <div class="col-md-8 offset-md-2">
-                <div class="card my-3 shadow">
-                    <div class="card-body">
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{ form | crispy }}
-                            <input class="btn btn-primary btn-sm" type="submit">
-                        </form>
-                    </div>
-                </div>
-            </div>
+<style>
+  .custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+  }
+  .custom-file-upload:hover {
+    background-color: #e0e0e0;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .edit-preview {
+    max-height: 220px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="container">
+  <div class="row mt-5 pt-3">
+    <div class="col-md-8 offset-md-2">
+      <div class="card my-3 shadow">
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Current image preview -->
+            {% if form.instance.image %}
+              <img src="{{ form.instance.image.url }}" alt="Current image" class="edit-preview">
+            {% endif %}
+
+            <!-- Title, content etc -->
+            {{ form.title|as_crispy_field }}
+            {{ form.content|as_crispy_field }}
+
+            <!-- File input -->
+            <label for="id_image" class="custom-file-upload">Change Image</label>
+            {{ form.image }}
+
+            <br><br>
+            <input class="btn btn-primary btn-sm" type="submit" value="Save Changes">
+          </form>
         </div>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock %}

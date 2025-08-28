@@ -15,15 +15,20 @@
     <!-- Optional: If you use Tailwind as well -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- custom CSS -->
-    <link rel="stylesheet" href="{% static '/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>{% block title %}{% endblock %}</title>
+
     {% tailwind_css %}
   </head>
-  <body class="bg-gray-white font-serif leading-normal tracking-normal px-[5px] py-[5px]">
+  <body class="font-serif leading-normal tracking-normal px-[5px] py-[5px]" style="background: url('https://www.transparenttextures.com/patterns/climpek.png')">
+<!-- https://www.transparenttextures.com/patterns/climpek.png -->
 
   {% if request.resolver_match.url_name != 'users-login' and request.resolver_match.url_name != 'users-sign-up' and request.resolver_match.url_name != 'users-logout' and request.resolver_match.url_name != 'password_reset' and request.resolver_match.url_name != 'password_reset_complete' and request.resolver_match.url_name != 'password_reset_confirm' and request.resolver_match.url_name != 'password_reset_done' %}
     {% include "partials/nav.html" %}
   {% endif %}
+  
 
    
     {% block content %}
@@ -31,10 +36,21 @@
     {% endblock %}
     
     
+
+  {% if request.resolver_match.url_name != 'users-login' and request.resolver_match.url_name != 'users-sign-up' and request.resolver_match.url_name != 'users-logout' and request.resolver_match.url_name != 'password_reset' and request.resolver_match.url_name != 'password_reset_complete' and request.resolver_match.url_name != 'password_reset_confirm' and request.resolver_match.url_name != 'password_reset_done' %}
+    {% include "partials/footer.html" %}
+  {% endif %}
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <!-- <style>
+      .card{
+        background-image: url('https://www.transparenttextures.com/patterns/climpek.png');
+      }
+    </style> -->
   </body>
  </html>

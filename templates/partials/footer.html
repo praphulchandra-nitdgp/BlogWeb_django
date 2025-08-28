@@ -1,0 +1,55 @@
+<footer class="bg-[#f7f7f9] text-gray-700 mt-10 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- Column 1: Logo & About -->
+    <div class="space-y-3 text-center md:text-left">
+      <a href="{% url 'blog-index' %}" class="flex items-center justify-center space-x-2">
+        <img src="/media/Quartzo Font.png" alt="Logo" class="w-36">
+      </a>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        A platform for passionate bloggers to share stories, ideas, and knowledge. 
+        Join our community and let your words make an impact.
+      </p>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="text-center">
+      <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="{% url 'blog-index' %}" class="hover:text-blue-600 transition">Home</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-blue-600 transition">About</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-blue-600 transition">Contact</a></li>
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'users-profile' %}" class="hover:text-blue-600 transition">Profile</a></li>
+        {% else %}
+          <li><a href="{% url 'users-login' %}" class="hover:text-blue-600 transition">Login</a></li>
+          <li><a href="{% url 'users-sign-up' %}" class="hover:text-blue-600 transition">Signup</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <!-- Column 3: Social Links -->
+    <div class="text-center md:text-right justify-center">
+      <h3 class="text-lg font-semibold mb-3">Follow Us</h3>
+      <div class="flex justify-center space-x-4">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <img src="/media/Facebook Icons.png" alt="Facebook" class="w-6 h-6 hover:opacity-75 transition">
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <img src="/media/Instagram Logo.png" alt="Instagram" class="w-6 h-6 hover:opacity-75 transition">
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <img src="/media/LinkedIn Icon.png" alt="LinkedIn" class="w-6 h-6 hover:opacity-75 transition">
+        </a>
+        <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">
+          <img src="/media/Pinterest icon.png" alt="Pinterest" class="w-6 h-6 hover:opacity-75 transition">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bg-gray-100 text-gray-600 text-center text-sm py-3">
+    © BlogScribers. All Rights Reserved.
+  </div>
+</footer>

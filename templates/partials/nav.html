@@ -67,20 +67,28 @@
     </ul>
   </div>
 </nav> -->
-<nav class="top-0 w-full bg-[#fafafc] text-black z-50 text-sm">
+<nav class="top-0 w-full text-black z-50 text-sm">
   <!-- Row 1: 1 : 2 : 1 -->
   <div class="flex items-center justify-between bg-[#ebe9e9] h-[55px] px-3 text-xs sm:text-sm">
     {% if request.user.is_authenticated %}
     <!-- Left: Social Icons -->
     <div class="flex items-center space-x-2">
-      <img src="/media/Facebook Icons.png" alt="Facebook" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
-      <img src="/media/Instagram Logo.png" alt="Instagram" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
-      <img src="/media/LinkedIn Icon.png" alt="LinkedIn" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
-      <img src="/media/Pinterest icon.png" alt="Pinterest" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      <a href="https://www.facebook.com/profile.php?id=100011406948979" target="_blank" rel="noopener noreferrer">
+        <img src="/media/Facebook Icons.png" alt="Facebook" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      </a>
+      <a href="https://www.instagram.com/praphul_chandra_370/" target="_blank" rel="noopener noreferrer">
+        <img src="/media/Instagram Logo.png" alt="Instagram" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      </a>
+      <a href="https://www.linkedin.com/in/praphul-chandra-ganapathri/" target="_blank" rel="noopener noreferrer">
+        <img src="/media/LinkedIn Icon.png" alt="LinkedIn" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      </a>
+      <a href="https://in.pinterest.com/praphulchandrag/_profile/" target="_blank" rel="noopener noreferrer">
+        <img src="/media/Pinterest icon.png" alt="Pinterest" class="w-4 h-4 sm:w-5 sm:h-5 rounded-sm">
+      </a>
     </div>
 
     <!-- Center: Call-out Phrase -->
-    <div class="hidden sm:block italic text-gray-600 text-center mx-4 text-[0.7rem] sm:text-sm md:text-base">
+    <div class="hidden sm:block italic text-gray-900 text-center mx-4 text-[0.7rem] sm:text-sm md:text-base">
       Calling all passionate bloggers — share your voice on my blog!
     </div>
 
@@ -133,21 +141,14 @@
 </li>
 
   <li>
-    <a href="#" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
+    <a href="{% url 'about' %}" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
             hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
       About
     </a>
   </li>
 
   <li>
-    <a href="#" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
-            hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
-      Services
-    </a>
-  </li>
-
-  <li>
-    <a href="#" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
+    <a href="{% url 'contact' %}" class="block w-full px-4 py-2 md:px-0 md:py-3 text-black font-semibold text-center 
             hover:text-black hover:bg-gray-100 no-underline hover:no-underline rounded transition duration-200 ease-in-out">
       Contact
     </a>

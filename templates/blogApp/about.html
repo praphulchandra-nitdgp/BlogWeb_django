@@ -1,0 +1,180 @@
+{% extends 'partials/base.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+<div class="container pt-5">
+    <h1 class="fw-bold text-center text-primary mb-3 text-xl" 
+        style="text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px;">
+            About Us
+    </h1>
+    <div class="row justify-content-center">
+
+        <!-- Left Column (Glow Profile Card) -->
+        <div class="col-md-4 d-flex justify-content-center">
+            <div class="card-container">
+                <div class="card" style="background: url('https://www.transparenttextures.com/patterns/cubes.png');">
+                    <!-- Glow effect -->
+                    <div class="glow"></div>
+
+                    <!-- Profile Image -->
+                    <img src="../../media/myPhoto.jpeg" 
+                        alt="Profile Image" 
+                        class="rounded-circle img-fluid mx-auto d-block mb-3 shadow-sm z-10" 
+                        style="width:180px; height:180px; object-fit:cover;">
+
+                    <!-- About Text -->
+                    <h3 class="fw-bold text-muted">Hey, I'm <span class="text-primary">Praphul Chandra 👋,</span></h3>
+                    <p class="text-muted">
+                        Welcome to my little corner of the internet. This blog is a space 
+                        where I share my thoughts, passions, and experiences. Whether you're 
+                        here for fresh ideas, a little motivation, or just to connect, I 
+                        hope you find something that speaks to you. Have fun browsing!
+                    </p>
+
+                    <!-- Social Links -->
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                        <img src="/media/Facebook Icons.png" alt="Facebook" class="rounded-sm" style="width:28px; height:28px;">
+                        <img src="/media/Instagram Logo.png" alt="Instagram" class="rounded-sm" style="width:28px; height:28px;">
+                        <img src="/media/LinkedIn Icon.png" alt="LinkedIn" class="rounded-sm" style="width:28px; height:28px;">
+                        <img src="/media/Pinterest icon.png" alt="Pinterest" class="rounded-sm" style="width:28px; height:28px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column (Website Content) -->
+        <div class="col-md-8">
+            <div class="card border-0 rounded-3 p-4 shadow-sm">
+                <strong><h2 class="fw-bold text-primary" style="text-decoration: underline; text-decoration-thickness: 2px;">About BlogScribe</h2></strong>
+                <p class="text-dark">
+                    <strong>BlogScribe</strong> was created with a simple vision: to give everyone a voice. 
+                    In today’s fast-paced digital world, it’s easy to get lost in the noise. 
+                    BlogScribe provides a dedicated space where people can slow down, gather their 
+                    thoughts, and share their stories with the world. 
+                </p>
+                <p class="text-dark">
+                    Whether you’re a seasoned writer, a budding blogger, or someone who simply wants 
+                    to express an idea, BlogScribe is here to support you. From personal reflections 
+                    and lifestyle stories to in-depth tutorials and thought-provoking discussions, 
+                    every post on this platform is a step toward building a meaningful community of 
+                    readers and creators.  
+                </p>
+
+                <strong><h4 class="fw-bold text-primary" style="text-decoration: underline; text-decoration-thickness: 2px;">Our Mission</h4></strong>
+                <p class="text-dark">
+                    At BlogScribe, our mission is to connect people through words. We aim to create 
+                    an inclusive, respectful platform where diverse perspectives are celebrated and 
+                    meaningful conversations flourish. 
+                </p>
+                <p class="text-dark">
+                    We believe that every story matters. Each voice adds value to the larger 
+                    conversation, and every shared perspective has the power to inspire, educate, 
+                    and bring people closer together. BlogScribe was designed to be simple, intuitive, 
+                    and open — a space where creativity thrives without barriers.
+                </p>
+                <p class="text-dark">
+                    Beyond just blogging, BlogScribe is about fostering community. It’s a place 
+                    where readers engage with writers, ideas spark conversations, and creativity 
+                    finds a stage.  
+                </p>
+
+                <!-- Thank You Note -->
+                <div class="mt-4">
+                    <p class="fw-semibold fs-5 text-dark">
+                        ✨ Thank you for being part of BlogScribe — your words and presence 
+                        make this journey truly special. Together, we are building more than a 
+                        blog — we are shaping a community. ✨
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script for ONLY Glow Animation -->
+<script>
+const card = document.querySelector('.card-container .card');
+const glow = card.querySelector('.glow');
+
+card.addEventListener('mousemove', (e) => {
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  card.style.setProperty('--x', `${x}px`);
+  card.style.setProperty('--y', `${y}px`);
+});
+
+card.addEventListener('mouseenter', () => {
+  glow.style.opacity = '1';
+});
+
+card.addEventListener('mouseleave', () => {
+  glow.style.opacity = '0';
+});
+</script>
+<style>
+    .card-container {
+  perspective: 1000px;
+  z-index: 1;
+}
+
+.card-container .card {
+  position: relative;
+  width: 100%;
+  padding: 2em;
+  color: white;
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  z-index: 1;
+}
+
+/* Noise overlay */
+.card-container .card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle border highlight */
+.card-container .card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Glow cursor effect */
+.card-container .glow {
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(cixsrcle at center, rgba(0, 123, 255, 0.587), transparent 80%);
+
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: top 0.1s, left 0.1s, opacity 0.3s ease;
+  z-index: 0;
+}
+
+</style>
+{% endblock %}

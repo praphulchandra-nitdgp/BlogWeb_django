@@ -2,41 +2,128 @@
 {% block title %}Home page{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="container">
-        <div class="row flex-row-reverse mt-5 pt-3">
-            <div class="col-md-4">
-                <div class="card my-3 shadow">
-                    <div class="card-body">
-                        <form method="post">
-                            {% csrf_token %}
-                            {{form|crispy}}
-                            <input class="btn btn-primary btn-block" type="submit" value="post">
-                        </form>
-                    </div>
+<style>
+    /* Blog card styling */
+    .blog-card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .blog-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .blog-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #242424;
+        text-decoration: none;
+        transition: color 0.2s, text-decoration 0.2s;
+    }
+    .blog-title:hover {
+        color: #454545;
+        text-decoration: underline;
+    }
+
+    .blog-meta {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-content {
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* show only 3 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Author avatar */
+    .author-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    .author-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<div class="container">
+    <div class="row flex-row-reverse mt-4 pt-3">
+        <!-- Right column (form) -->
+        <div class="col-md-4">
+            <div class="card my-3 border-2 rounded-3">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3 text-gray-900 text-lg">Create a Post</h5>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Render text inputs (title, content) -->
+                        {{ form.title|as_crispy_field }}
+                        {{ form.content|as_crispy_field }}
+
+                        <!-- Custom styled file input -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Upload Image</label>
+                            <input class="form-control bg-gray-100" type="file" name="image" required>
+                        </div>
+
+                        <input class="btn bg-gray-700 text-white w-100" type="submit" value="Post">
+                    </form>
                 </div>
             </div>
-            <div class="col-md-8">
-                {% for post in posts %}
-                <div class="card shadow my-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img class="img-thumbnail" src="{{ post.author.profilemodel.image.url }}" alt="image">
-                            </div>
-                            <div class="col-md-8">
-                                <small>{{ post.date_created }}</small>
-                                <hr>
-                                <a class="h3" href="{% url 'blog-post-detail' post.id %}">{{post.title}}</a>
-                                <p class="text-justify my-3">
-                                    {{post.content}}
-                                </p>
-                            </div>
+        </div>
+
+        <!-- Left column (posts) -->
+        <div class="col-md-8">
+            {% for post in posts %}
+            <div class="card blog-card my-4">
+                <div class="card-body">
+                    
+                    <!-- Author info -->
+                    <div class="author-info">
+                        <img class="author-avatar" src="{{ post.author.profilemodel.image.url }}" alt="author">
+ 
+                        <div>
+                            <strong>{{ post.author.username }}</strong><br>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Title -->
+                    <a class="blog-title d-block mb-2" href="{% url 'blog-post-detail' post.id %}">
+                        {{post.title}}
+                    </a>
+
+                    <!-- Content preview -->
+                    <p class="blog-content" style="white-space: pre-line;">
+                        {{ post.content|linebreaksbr }}
+                    </p>
+                    <div class="flex text-center gap-4 mt-3">
+                        <span class="blog-meta">{{ post.date_created|date:"M d, Y" }}</span>
+                        <div class="flex text-center">
+                            <i class="fa-regular fa-comment blog-meta"></i><span class="blog-meta">{{post.comment_count}}</span>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
-            
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock %}

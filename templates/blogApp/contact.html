@@ -1,0 +1,69 @@
+{% extends 'partials/base.html' %}
+{% block title %}Contact Us{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <h1 class="fw-bold text-center text-primary mb-3 text-xl" 
+                style="text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px;">
+                Get in Touch
+            </h1>
+            <!-- Contact Card -->
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-4">
+                    <!-- Heading -->
+                    <p class="text-muted text-center mb-4">
+                        We'd love to hear from you! Whether it’s feedback, questions, or just a hello - 
+                        drop us a message and we’ll get back to you soon.
+                    </p>
+                    <!-- Contact Form -->
+                    <form method="post" class="needs-validation">
+                        {% csrf_token %}
+                        
+                        <!-- Crispy form fields -->
+                        <div class="mb-2">
+                            {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="mb-2">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                        <div class="mb-2">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+                        <!-- Submit button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-md rounded-pill shadow-sm">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Extra Styling -->
+<style>
+    .card {
+        background: #ffffff;
+    }
+    .form-control {
+        border-radius: 12px !important;
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+    .btn-primary {
+        background: linear-gradient(90deg, #007bff, #0056d2);
+        border: none;
+        transition: 0.3s ease;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(90deg, #0056d2, #003c9e);
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
